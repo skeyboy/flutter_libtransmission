@@ -56,3 +56,4 @@ export VCPKG_MANIFEST_DIR=$(pwd)
 flutter devices # List available devices
 flutter run -d {device_id} # start the app in development mode
 ```
+
