@@ -23,8 +23,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - run: flutter build apk --debug
-      - run: flutter build apk --release
+     
       - run: flutter build ios --no-codesign
       - run: flutter build macos
       - name: Prepare artifacts
