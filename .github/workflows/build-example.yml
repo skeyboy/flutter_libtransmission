@@ -1,5 +1,9 @@
 name: Build example
-on: [push]
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: # 允许手动触发
+
 jobs:
   windows:
     runs-on: windows-2022
@@ -61,6 +65,14 @@ jobs:
         with:
           channel: stable
       - run: flutter build macos
+      - name: Prepare artifacts
+        run: |
+          mkdir ~/artifacts
+          cp ./build/../flutter_libtransmission ~/artifacts/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pikatorrent-android
+          path: ~/artifacts/
 
   android:
     runs-on: ubuntu-24.04
@@ -87,7 +99,7 @@ jobs:
       - name: Prepare artifacts
         run: |
           mkdir ~/artifacts
-          cp ./build/app/outputs/flutter-apk/*.apk ~/artifacts/
+          cp ./build/../flutter_libtransmission ~/artifacts/
       - uses: actions/upload-artifact@v4
         with:
           name: pikatorrent-android
@@ -115,3 +127,11 @@ jobs:
         with:
           channel: stable
       - run: flutter build ios --no-codesign
+      - name: Prepare artifacts
+        run: |
+          mkdir ~/artifacts
+          cp ./build/../flutter_libtransmission ~/artifacts/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pikatorrent-android
+          path: ~/artifacts/
