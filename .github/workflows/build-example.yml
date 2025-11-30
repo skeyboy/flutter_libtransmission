@@ -27,6 +27,7 @@ jobs:
       - name: Prepare artifacts
         run: |
           mkdir ~/artifacts
+          flutter pub get
           cd ios && pod install
           mv ./ios ~/artifacts/
           mv ./build ~/artifacts/
